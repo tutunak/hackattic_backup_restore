@@ -1,0 +1,4 @@
+backoff==2.0.1
+docker==5.0.3
+psycopg-binary==3.0.14
+requests==2.27.1
