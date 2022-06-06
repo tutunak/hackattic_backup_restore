@@ -94,6 +94,8 @@ def post_alive_ssns(ssns: list) -> None:
     except Exception as e:
         print(f"Something went wrong while posting the result:\n {e}")
         exit(1)
+    else:
+        print(f"Result posted successfully {resp}, response: {resp.text}")
 
 
 def to_list(ssns: list) -> list:
