@@ -126,8 +126,6 @@ def main():
         alive_ssns = to_list(database.get_alive_ssns())
     except Exception as e:
         print("Something went wrong while getting the alive SSNs:\n", e)
-        database.finalize()
-        exit(1)
     database.finalize()
     post_alive_ssns(alive_ssns)
 
