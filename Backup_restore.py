@@ -117,8 +117,14 @@ def main():
     dump_object = get_dump_object(config["access_token"])
     _ = dump_to_file(dump_object, config['current_path'])
     database.restore_database()
-    alive_ssns = to_list(database.get_alive_ssns())
-    database.finalize()
+    try:
+        # without retries to pass the time limit. Somtimes resource returns
+        # empty database dump
+        alive_ssns = to_list(database.get_alive_ssns())
+    except Exception as e:
+        print("Something went wrong while getting the alive SSNs:\n", e)
+    finally:
+        database.finalize()
     post_alive_ssns(alive_ssns)
 
 
