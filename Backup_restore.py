@@ -111,13 +111,13 @@ def main():
     # run before we get data from there server - there is timelimit
     dump_path = dump_to_file("", config['current_path'])
     database = DB(dump_path)
-    # wait when database will be available
+    # wait when database will be available 25 seconds guaranty that
+    print("Waiting for database to be available ...")
     time.sleep(25)
     dump_object = get_dump_object(config["access_token"])
     _ = dump_to_file(dump_object, config['current_path'])
     database.restore_database()
     alive_ssns = to_list(database.get_alive_ssns())
-    print(alive_ssns)
     database.finalize()
     post_alive_ssns(alive_ssns)
 
