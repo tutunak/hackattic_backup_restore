@@ -118,7 +118,8 @@ def main():
     _ = dump_to_file(dump_object, config['current_path'])
     database.restore_database()
     # sometimes I get empty dump. Maybe the right answer is [] - so I'll
-    # try to check it
+    # try to check it.
+    # update - empty list won't work =) checked from another account
     alive_ssns = []
     try:
         # without retries to pass the time limit. Somtimes resource returns
