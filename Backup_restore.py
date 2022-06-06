@@ -3,7 +3,7 @@ import time
 import base64
 import requests
 import docker
-import psycopg
+import psycopg2
 
 
 class DB:
@@ -25,7 +25,7 @@ class DB:
             exit(1)
 
     def get_alive_ssns(self) -> list:
-        with psycopg.connect(f"host=localhost dbname=postgres user=postgres password={self.__password}") as conn:
+        with psycopg2.connect(f"host=localhost dbname=postgres user=postgres password={self.__password}") as conn:
             with conn.cursor() as cur:
                 cur.execute("SELECT ssn FROM criminal_records WHERE status LIKE 'alive'")
                 return cur.fetchall()
