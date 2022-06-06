@@ -2,7 +2,6 @@ import os
 import time
 import base64
 import requests
-import backoff
 import docker
 import psycopg
 
@@ -57,15 +56,22 @@ def configuration() -> dict:
     return config
 
 
-@backoff.on_exception(
-    backoff.expo,
-    requests.exceptions.RequestException,
-    max_tries=5)
 def get_dump_object(access_token: str) -> str:
-    req = requests.get(
-        "https://hackattic.com/challenges/backup_restore/problem",
-        params={"access_token": access_token}
-    )
+    attempts = 5
+    pause = 5
+    while attempts:
+        try:
+            req = requests.get(
+                "https://hackattic.com/challenges/backup_restore/problem",
+                params={"access_token": access_token}
+            )
+            req.raise_for_status()
+        except Exception as e:
+            print(f"Something went wrong while getting the dump object {e}")
+            attempts -= 1
+            pause += 3
+        else:
+            break
     return req.json()["dump"]
 
 
