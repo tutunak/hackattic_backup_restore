@@ -32,6 +32,6 @@ https://hackattic.com/challenges/backup_restore
 
 #### Notes
 * Sometimes it returns empty dump. I suppose it connected to protection of hackattic instead of many requests from with one access token
-* Logging wasn't implemented to safe tyme for development this solution
-* Unittest wasn't implemented to safe tyme for development this solution
+* Logging wasn't implemented to save tyme for development this solution
+* Unittest wasn't implemented to save tyme for development this solution
 * 25 seconds pause guaranty that db will work. 
